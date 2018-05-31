@@ -1,0 +1,277 @@
+<html>
+<body>
+<head>
+	<meta charset="UTF-8">
+	<title>Biblioteca</title>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/sha1/sha1.pack.js"></script>
+	<script> 
+		function encriptar() {
+			var input_clave = document.getElementById("xclave");
+			input_clave.value=sha1(input_clave.value);
+		};
+	</script>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<LINK href="css/estilo2.css" type="text/css" rel="stylesheet"> 
+	<link rel="stylesheet" type="text/css" href="css/estilitos5.css">
+	<link rel="stylesheet" type="text/css" href="css/estiloUsuarios.css">
+	
+	<link type="text/css" href="css/pagination.css" rel="stylesheet">
+	 <script src="js/jquery.paginate.js"></script>
+</head>	 
+	<h3>Detalle de Devolucion</h3><br>
+	 <table>
+					<tbody>
+						
+					</tbody>
+				</table> 
+				
+				
+				
+				
+<table width="50%" border="0">
+	<tr>
+        <td  colspan="5">
+	<div id="paginationdemo2" class="demo" style="padding-bottom:3px;padding-left:3px;padding-right:3px;padding-top:3px;background-color: IndianRed;border-radius: 6px;">
+	
+			 #set($j=1)
+        
+        #set($cont=1)
+        
+        #set($ini=0)
+        #set($fin=10)
+        #foreach($lisper in $xlista)        
+
+            #if($cont%2 == 0) #set($col=1) #else #set($col=0)
+            #end
+
+            #if($cont == 1)
+                #set($div2=$j)
+			
+			<div id="div2${div2}" class="pagedemo _current" style="padding-bottom:2px;padding-left:2px;padding-right:2px;padding-top:2px;background: rgba(101, 75, 36, 0.530);">
+		
+	  				<table class="adminlist">
+		
+                    	<thead>
+                    		<tr>
+								<th width="20">Titulo</th>
+                    		</tr>
+                    	</thead>					
+                    	<tbody>
+
+            				#set($i=1)
+            				#foreach($lisper in $xlista)	
+            																	
+								#if($i%2 == 0) #set($col=1) #else #set($col=0) #end	
+								#set($id=$i)
+ 	                            #if(($i>$ini)and($i<=$fin))
+							<tr id="p${id}" class="row${col}"> 
+								
+								<td align="center">${lisper.titulo} </td> 
+								 
+								
+								
+							</tr>
+            			#else
+                                
+                        #end
+
+                        #set($i=$i+1)
+                        #end
+                        #set($j=$j+1)
+                        #set($ini=$ini+10)
+                        #set($fin=$fin+10)
+            				                		
+                    	</tbody>
+         	</table>
+         	
+			</div>
+           
+            #else
+                #if(($cont%10 == 1))
+                #set($div2=$j)
+                
+		<div id="div2${div2}" class="pagedemo" style="display: none;padding-bottom:2px;padding-left:2px;padding-right:2px;padding-top:2px;background: rgba(101, 75, 36, 0.530);">
+		
+	  				<table class="adminlist">
+		
+                    	<thead>
+                    		<tr>
+								<th width="20">CodInv</th>
+								<th width="20">Titulo</th>
+								<th width="20"> Estado </th>
+                    		</tr>
+                    	</thead>					
+                    	<tbody>
+
+            				#set($i=1)
+            				#foreach($lisper in $xlista)	
+            																	
+								#if($i%2 == 0) #set($col=1) #else #set($col=0) #end	
+								#set($id=$i)
+ 	                            #if(($i>$ini)and($i<=$fin))
+							<tr id="p${id}" class="row${col}"> 
+								
+								<td align="center">${lisper.codinv} </td> 
+								<td align="center">${lisper.titulo} </td> 
+								  
+								<td align="center">
+									#if (${lisper.estado}==1)
+										<input type="checkbox" id="proc_${lisper.codp}"  name="proc_${lisper.codp}" onchange="javascript:proc_sel('${lisper.codp}');" />	
+									#else
+										<input type="checkbox" id="proc_${lisper.codp}"  name="proc_${lisper.codp}" onchange="javascript:proc_sel('${lisper.codp}');" checked disabled/>
+									#end	
+								 </td>								
+							</tr>
+            				
+							
+							#else
+                                
+                            #end
+							
+            				#set($i=$i+1)
+            				#end                   		
+                    	</tbody>
+         	</table>
+		
+		</div>
+		
+		#set($ini=$ini+10)
+                #set($fin=$fin+10)
+                
+                #set($j=$j+1)
+                #end
+            #end
+
+        #set($id=$cont)
+        
+        #set($cont=$cont+1)
+
+        #end
+
+        #set($cont=$cont - 1)
+        #if($cont>10)
+            #if(($cont%10)==0)
+                #set($divs2=($cont/10))
+            #else
+                #set($divs2=($cont/10)+1)
+            #end
+        #else
+            #set($divs2=1)
+        #end
+		
+		<div id="paginador2" style="width:50%;display:inline-block;background:"#fff";">
+        </div>
+        <div style="float:right;display:inline-block;font-family: serif;">$cont Resultados
+        </div>
+        <script type="text/javascript">
+                $(function(){
+                    $("#paginador2").paginate({
+                        count: $divs2,
+                        start: 1,
+                        display: 10,
+                        border: true,
+                        border_color: '#fff',
+                        text_color: 'white',
+                        background_color: 'darkred',
+                        border_hover_color: 'darkred',
+                        text_hover_color: '#C03400',
+                        text_align: 'right',
+                        background_hover_color: '#fff',
+                        images: false,
+                        mouse: 'press',
+                        onChange: function (page){
+                            $('._current','#paginationdemo2').removeClass('_current').hide();
+                            $('#div2' + page).addClass('_current').show();
+                        }
+                    });
+                });
+        </script>
+		</div>
+		</td>
+    </tr>
+<script type="text/javascript">
+    function eliminarArea(coda){
+    	if(confirm('¿Seguro de Eliminar Area ?')){
+    		window.location="delArea.html?xcoda="+coda;
+    	}		
+    }
+    
+    function habilitarArea(coda){
+    	if(confirm('¿Seguro de Habilitar Area ?')){
+    		window.location="habArea.html?xcoda="+coda;
+    	}		
+    }
+	
+	$(document).ready(function(){  
+		$("#buscarArea").click(function (){
+			var xarea=$("#xarea").val();
+			location.href="areas.html?xarea="+xarea;
+		});
+   	}); 
+	
+	
+</script>
+</table>				
+	
+				
+				
+				
+		<div class="ventanaAddPer" align="center">
+			<h1>Añadir Nuevo Ejemplar</h1><br>
+			<form action="addEjemplar_2.html" name="form1" method="post">
+			<input type="hidden" name="xcodt" value="${codigoT}" />
+			<input type="text" name="xcodinv" placeholder="Nro. de Inventaio.." id="id_ci" onkeypress="return filtroEntrada1(event)" required/><br>
+			<input type="submit" onclick="confirmacion()" name="boton" value="Guardar"/>
+			<a href="javascript:closeVentanaAddArea();">Cancelar</a>
+			</form>
+		</div>						
+</body>
+</html>
+<script>
+			function confirmacion(){
+			if(confirm('Estas seguro de enviar este formulario?')){
+				document.form1.submit();
+				}
+			}
+			function closeVentanaAddArea(){
+				$(".ventanaAddPer").slideUp(1000);
+			}
+			function openVentanaAddArea(){
+				$(".ventanaAddPer").slideDown(1000);
+			}
+			
+			function filtroEntrada1(event) {
+          		var chCode = ('charCode' in event) ? event.charCode : event.keyCode;
+          		//retorna FALSE si se pulsa teclas numericas
+        		  return (chCode < 58 /* '0' */ || chCode > 126 /* '9' */ );
+			}
+		
+			function proc_sel(codp){		    
+			
+				alert("codp="+codp);				
+				
+				if ( $("#proc_"+codp).is(":checked")){
+					$.ajax({
+						   type: "POST",
+						   url: "saveDevol.html",
+						   data:"codp="+codp,			   
+						   success: function(data){	},
+						   error: function (e){				
+								alert("Error de conexion..!");
+						   }
+					});
+				}else{
+					$.ajax({
+						   type: "POST",
+						   url: "delMepro.html",
+						   data:"codp="+codp+"&codm="+codm,			   
+						   success: function(data){	},
+						   error: function (e){				
+								alert("Error de conexion..!");
+						   }
+					});
+				} 
+				
+			}
+</script>			

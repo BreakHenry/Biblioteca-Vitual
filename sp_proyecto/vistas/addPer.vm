@@ -1,0 +1,27 @@
+
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Biblioteca</title>
+	
+</head>
+
+			 
+	
+	
+		
+	<body><center>
+		<h1>Adicionar Personas</h1>
+		<form action="addPer_2.html" method="POST">
+			CODPER::<input type="text" name="xcodper"> <BR>
+			NOMBRE::<input type="text" name="xnombre"> <BR>
+			AP::<input type="text" name="xap"> <BR>
+			AM<input type="text" name="xam"> <BR>
+			<input type="submit" value="Guardar"> <BR>
+		</form>	
+		</center>			
+	</body>
+
+			
+		
+</html>

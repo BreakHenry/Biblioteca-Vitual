@@ -1,0 +1,228 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Biblioteca</title>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/sha1/sha1.pack.js"></script>
+	<script> 
+		function encriptar() {
+			var input_clave = document.getElementById("xclave");
+			input_clave.value=sha1(input_clave.value);
+		};
+	</script>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<LINK href="css/estilo2.css" type="text/css" rel="stylesheet"> 
+	<link rel="stylesheet" type="text/css" href="css/estilitos5.css">
+	<link rel="stylesheet" type="text/css" href="css/estiloUsuarios.css">
+	
+	<link type="text/css" href="css/pagination.css" rel="stylesheet">
+	 <script src="js/jquery.paginate.js"></script>
+</head>	 
+<body>
+	<h3>LISTA DE PROCESOS</h3><br>
+	  						Fitro:
+							<form name="tipos" id="tipos" action="menus.html" target="informacion" method="post" onload="this.form.submit()">				
+								
+								<input id="xbusqueda" type="text" value="" name="xproc"/>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</form>
+	
+	
+	<table width="100%" border="0">
+	<tr>
+        <td  colspan="5">
+	<div id="paginationdemo2" class="demo" style="padding-bottom:3px;padding-left:3px;padding-right:3px;padding-top:3px;background-color: IndianRed;border-radius: 6px;">
+	
+			 #set($j2=1)
+        
+        #set($cont2=1)
+        
+        #set($ini2=0)
+        #set($fin2=10)
+        #foreach($reg in $xlistaProc)        
+
+            #if($cont2%2 == 0) #set($col2=1) #else #set($col2=0)
+            #end
+
+            #if($cont2 == 1)
+                #set($div2=$j2)
+			
+			<div id="div2${div2}" class="pagedemo _current2" style="padding-bottom:2px;padding-left:2px;padding-right:2px;padding-top:2px;background: rgba(101, 75, 36, 0.530);">
+		
+	
+			<table class="adminlist" >
+		
+             <thead>
+				<tr>
+					<th>codp</th>
+					<th>Nombre</th>
+					<th>#</th>
+				</tr>
+			</thead>					
+            <tbody>	
+            	#set($i2=1)
+				#foreach($reg in $xlistaProc)
+					#set($ok='')								
+					#foreach($mepro in $xlistaMepro)
+						#if(${reg.codp} == ${mepro.codp}) 
+							#set($ok='checked') 
+						#end
+					#end
+					#if($i2%2 == 0) #set($col2=1) #else #set($col2=0) #end	
+								#set($id2=$i2)
+ 	                         
+ 	                            #if(($i2>$ini2)and($i2<=$fin2))
+							<tr id="p${id2}" class="row${col2}">
+                    			<td align="center" width="30"> ${i2}  </td>   							
+													
+						<td>${reg.nombre}  </td>
+						<td>  
+<input type="checkbox" id="proc_${reg.codp}"  name="proc_${reg.codp}" onchange="javascript:proc_sel('${reg.codp}');" ${ok} />	
+						</td>
+					</tr>
+					#else
+                                
+                    #end
+					
+					#set($i2=$i2+1)
+				#end
+						#set($ini2=$ini2+10)
+                        #set($fin2=$fin2+10)
+				</tbody>
+			</table>
+		</div>
+		
+			#else
+                #if(($cont2%10 == 1))
+                #set($div2=$j2)
+                
+		<div id="div2${div2}" class="pagedemo" style="display: none;padding-bottom:2px;padding-left:2px;padding-right:2px;padding-top:2px;background: rgba(101, 75, 36, 0.530);">
+				
+				<table class="adminlist" >
+		
+             <thead>
+				<tr>
+					<th>codp</th>
+					<th>Nombre</th>
+					<th>#</th>
+				</tr>
+			</thead>					
+            <tbody>	
+            	#set($i2=1)
+				#foreach($reg in $xlistaProc)
+					#set($ok='')								
+					#foreach($mepro in $xlistaMepro)
+						#if(${reg.codp} == ${mepro.codp}) 
+							#set($ok='checked') 
+						#end
+					#end
+					#if($i2%2 == 0) #set($col2=1) #else #set($col2=0) #end	
+								#set($id2=$i2)
+ 	                         
+ 	                            #if(($i2>$ini2)and($i2<=$fin2))
+							<tr id="p${id2}" class="row${col2}">
+                    			<td align="center" width="30"> ${i2}  </td>   							
+													
+						<td>${reg.nombre}  </td>
+						<td>  
+<input type="checkbox" id="proc_${reg.codp}"  name="proc_${reg.codp}" onchange="javascript:proc_sel('${reg.codp}');" ${ok} />	
+						</td>
+					</tr>
+					#else
+                                
+                            #end
+							
+            				#set($i2=$i2+1)
+            				#end                       		
+                    	</tbody>
+         	</table>
+		
+		</div>
+		
+		#set($ini2=$ini2+10)
+                #set($fin2=$fin2+10)
+                
+                #set($j2=$j2+1)
+                #end
+            #end
+
+        #set($id2=$cont2)
+        
+        #set($cont2=$cont2+1)
+
+        #end
+
+        #set($cont2=$cont2 - 1)
+        #if($cont2>10)
+            #if(($cont2%10)==0)
+                #set($divs2=($cont2/10))
+            #else
+                #set($divs2=($cont2/10)+1)
+            #end
+        #else
+            #set($divs2=1)
+        #end
+		
+		<div id="paginador2" style="width:50%;display:inline-block;background:"#fff";">
+        </div>
+        <div style="float:right;display:inline-block;font-family: serif;">$cont2 Resultados
+        </div>
+        <script type="text/javascript">
+                $(function(){
+                    $("#paginador2").paginate({
+                        count: $divs2,
+                        start: 1,
+                        display: 10,
+                        border: true,
+                        border_color: '#fff',
+                        text_color: 'white',
+                        background_color: 'darkred',
+                        border_hover_color: 'darkred',
+                        text_hover_color: '#C03400',
+                        text_align: 'right',
+                        background_hover_color: '#fff',
+                        images: false,
+                        mouse: 'press',
+                        onChange: function (page2){
+                            $('._current2','#paginationdemo2').removeClass('_current2').hide();
+                            $('#div2' + page2).addClass('_current2').show();
+                        }
+                    });
+                });
+        </script>
+		</div>
+		</td>
+    </tr>
+    </table>
+</body>
+</html>
+<script>
+			function proc_sel(codp){		    
+				var codm=$("input[name='menu_sel']:checked").val();
+			
+				//alert("codp="+codp+" codm ="+codm);				
+				
+				if ( $("#proc_"+codp).is(":checked")){
+					$.ajax({
+						   type: "POST",
+						   url: "saveMepro.html",
+						   data:"codp="+codp+"&codm="+codm,			   
+						   success: function(data){	},
+						   error: function (e){				
+								alert("Error de conexion..!");
+						   }
+					});
+				}else{
+					$.ajax({
+						   type: "POST",
+						   url: "delMepro.html",
+						   data:"codp="+codp+"&codm="+codm,			   
+						   success: function(data){	},
+						   error: function (e){				
+								alert("Error de conexion..!");
+						   }
+					});
+				} 
+				
+			}
+</script>			

@@ -1,0 +1,47 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+	<title>Biblioteca</title>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/sha1/sha1.pack.js"></script>
+	<script> 
+		function encriptar() {
+			var input_clave = document.getElementById("xclave");
+			input_clave.value=sha1(input_clave.value);
+		};
+	</script>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<LINK href="css/estilo2.css" type="text/css" rel="stylesheet"> 
+	<link rel="stylesheet" type="text/css" href="css/estilitos5.css">
+	<link rel="stylesheet" type="text/css" href="css/estiloUsuarios.css">
+	
+</head>
+<script type="text/javascript">
+$(document).ready(function(){
+    $( "#accordion" ).accordion({
+        header: "h3",
+        heightStyle: "content",
+        active: true,
+        collapsible: true,
+    });
+});
+</script>
+<body>
+    
+    #foreach($reg in $xmenus)
+			<div class="contenedor-logos" id="celda">
+				<div id="grupo">
+				<p class="icon-menu"><span>${reg.nombre}</span></p>
+				</div>
+				#foreach($op in $xopciones)
+      
+    		  #if(${reg.codm}==${op.codm})
+				<div class="contenedor"id="sub">
+				<p id="op" class="icon-triangle-right"><a href='${op.enlace}'><span>${op.nombre}</span></a></p>
+				</div>
+				#end
+				#end
+			</div>
+			#end
+</body>
+</html>

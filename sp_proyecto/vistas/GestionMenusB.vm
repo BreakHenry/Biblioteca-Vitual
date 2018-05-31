@@ -1,0 +1,515 @@
+
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Biblioteca</title>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/sha1/sha1.pack.js"></script>
+	<script> 
+		function encriptar() {
+			var input_clave = document.getElementById("xclave");
+			input_clave.value=sha1(input_clave.value);
+		};
+	</script>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<LINK href="css/estilo2.css" type="text/css" rel="stylesheet"> 
+	<link rel="stylesheet" type="text/css" href="css/estilitos5.css">
+	<link rel="stylesheet" type="text/css" href="css/estiloUsuarios.css">
+	
+	<link type="text/css" href="css/pagination.css" rel="stylesheet">
+	 <script src="js/jquery.paginate.js"></script>
+	
+	<script type="text/javascript">
+		function openVentana(){
+			$(".ventana1").slideDown(1000);
+		}
+		function closeVentana(){
+			$(".ventana1").slideUp(1000);
+		}
+		function closeVentana2(){
+			$(".ventana2").slideUp(1000);
+		}
+		function openVentana2(){
+			$(".ventana2").slideDown(1000);
+		}
+		function closeVentanaAddArea(){
+			$(".ventanaAddPer").slideUp(1000);
+		}
+		function openVentanaAddArea(){
+			$(".ventanaAddPer").slideDown(1000);
+		}
+		function closeVentanaModPer(){
+			$(".ventanaModPer").slideUp(1000);
+		}
+		function openVentanaModPer(){
+			$(".ventanaModPer").slideDown(1000);
+		}
+		
+		function confirmacion(){
+			if(confirm('Estas seguro de enviar este formulario?')){
+				document.form1.submit();
+			}
+		}
+		
+		function filtroEntrada(event) {
+          var chCode = ('charCode' in event) ? event.charCode : event.keyCode;
+          //retorna FALSE si se pulsa teclas numericas
+          return (chCode < 48 /* '0' */ || chCode > 57 /* '9' */);
+		}
+		
+		
+		function transformar() {  
+		    var x = document.getElementById("id_nombre");
+		    x.value = x.value.toUpperCase();
+		}
+		
+	</script>
+	
+</head>
+<body>
+		<table width="100%" id="supder">
+			<tr>
+				<td align="center" height="100px">
+					<img alt="menu" style="vertical-align: middle; width: 100%; height: 100%;" src="images/grey_book.png"/>
+				</td>
+				<td align="center">
+					<h1 id="titulo"><b>. : : B I B L I O T E C A ____B R E A K : : .</b></h1>
+					<br>
+					<div class="fecha">
+                    <script type="text/javascript">
+                    var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+                    var diasSemana = new Array ("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado");
+                    var f = new Date();
+                    document.write(diasSemana[f.getDay()]+", "+f.getDate()+" de "+meses[f.getMonth()]+" de "+f.getFullYear());
+                    
+                    </script>
+                </div>
+				</td>
+				<td align="right" width="275px">
+				<table width="100%" id="supder">
+				<tr>
+				<td align="left">
+					<p>${usuario.nombre} ${usuario.ap} ${usuario.am}</p>
+				
+                <select name="menu_sel" id="xrol">
+                                <option value="1" selected="select">Administrativo</option>
+                                #foreach($rol in $xroles)
+                                    <option value="${rol.codr}" class="menulateral">${rol.nombre}</option>
+                                #end
+                            	</select>
+				
+				</td>
+				<td width="20%">	
+					<a href="javascript:openVentana();"><img alt="menu" style="vertical-align: middle; width: 60px; height: 60px;" src="uploads/${usuario.foto}"/></a>
+				</td>
+				
+				</tr>
+				</table>
+				</td>
+			</tr>
+		</table>
+		<div id="barra-lateral">
+		#foreach($reg in $xmenus)
+			<div class="contenedor-logos" id="celda">
+				<div id="grupo">
+				<p class="icon-menu"><span>${reg.nombre}</span></p>
+				</div>
+				#foreach($op in $xopciones)
+      
+    		  #if(${reg.codm}==${op.codm})
+				<div class="contenedor"id="sub">
+				<p id="op" class="icon-triangle-right"><a href='${op.enlace}'><span>${op.nombre}</span></a></p>
+				</div>
+				#end
+				#end
+			</div>
+			#end
+		</div>
+		
+		
+		<div id="body" height="100%">
+			 
+	
+	
+<body>
+	
+	<div id="control-panel-title" align="left">
+		<span>
+			<img alt="menu" style="vertical-align: middle; width: 48px; height: 48px;" src="images/adm-personal.png"/>
+			.::Gestión Menus
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div id="notices"></div>
+		</span>
+	</div>
+	
+	<div style="margin:0 auto;width:85%">
+			<span class="title-table">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				
+				Filtro Menus:
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;
+			
+				<br>
+			</span>
+
+				<span class="title-table">
+				</span>
+
+				<table>
+					<tbody>
+						<tr>
+							<td align="center">
+							<td>
+							<form name="tipos" id="tipos" action="GestionMenusB.html" target="informacion" method="post" onload="this.form.submit()">				
+								
+								<input id="xbusqueda" type="text" value="${xmenu2}" name="xmenu"/>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</form>
+							</td>
+							<td>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<a href="GestionMenusA.html"><input type="radio" id="buscarActivos" name="" ></a>&nbsp;&nbsp;Activos
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+								<a href="GestionMenusB.html"><input id="buscarBajas" type="radio" name="" checked="checked"></a>&nbsp;&nbsp;Bajas
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<a href="GestionMenus.html"><input type="radio" name="" ></a>&nbsp;&nbsp;Todos
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</td>
+							<td>		
+									<a  href="javascript:openVentanaAddArea();">
+									<img src="images/opciones/add.png" style="vertical-align: middle;width:45px;height:45px" alt="Adicionar" title="Adicionar" />
+									</a>
+									Nuevo Menu			
+							</td>								
+							</td>
+						</tr>
+					</tbody>
+				</table>					
+	  				
+	  				
+	  				<table width="100%" border="0">
+	<tr>
+        <td  colspan="5">
+	<div id="paginationdemo" class="demo" style="padding-bottom:3px;padding-left:3px;padding-right:3px;padding-top:3px;background-color: IndianRed;border-radius: 6px;">
+	
+			 #set($j=1)
+        
+        #set($cont=1)
+        
+        #set($ini=0)
+        #set($fin=10)
+        #foreach($lisper in $xlista)        
+
+            #if($cont%2 == 0) #set($col=1) #else #set($col=0)
+            #end
+
+            #if($cont == 1)
+                #set($div=$j)
+			
+			<div id="div${div}" class="pagedemo _current" style="padding-bottom:2px;padding-left:2px;padding-right:2px;padding-top:2px;background: rgba(101, 75, 36, 0.530);">
+		
+	  				<table class="adminlist">
+		
+                    	<thead>
+                    		<tr>
+								<th width="20"> # </th>
+								<th class="title" nowrap="nowrap">Nombre del Menu</th>
+								<th width="20"> Estado </th>
+								<th width="20"> B </th>
+								<th width="20"> Hab </th>
+								<th width="20"> M </th>
+                    		</tr>
+                    	</thead>					
+                    	<tbody>
+
+            				#set($i=1)
+            				#foreach($lisper in $xlista)													
+								#if($i%2 == 0) #set($col=1) #else #set($col=0) #end	
+								#set($id=$i)
+ 	                            #if(($i>$ini)and($i<=$fin))
+							<tr id="p${id}" class="row${col}">
+                    			<td align="center" width="30"> ${i}  </td>   
+								
+								<td>${lisper.nombre} </td> 
+								  
+								<td>
+									#if (${lisper.estado}==1)
+										<img src="images/hand_up.png" style="vertical-align: middle;width:24px;height:24px" alt="Adicionar" title="Adicionar" />
+									#else
+										<img src="images/hand_down.png" style="vertical-align: middle;width:24px;height:24px" alt="Adicionar" title="Adicionar" />
+									#end	
+								 </td>
+								
+								
+								<td align="center" width="30">
+									<div id="confirmDelete">		
+										#if(${lisper.estado}==1)							
+    									<a  href="javascript:void(0)" onclick="javascript:eliminarMenu('${lisper.codm}')">
+    									<img  src="images/opciones/del.png" style="vertical-align: middle;width:24px;height:24px" alt="Eliminar" title="Eliminar" />
+    									</a>
+    									#else
+    									<img  src="images/opciones/del.png" style="vertical-align: middle;width:24px;height:24px" alt="Eliminar" title="Eliminar" />
+    									#end
+									</div>
+								</td>   
+								<td align="center" width="30">
+									<div id="confirmDelete">	
+										#if(${lisper.estado}==0)								
+    									<a  href="javascript:void(0)" onclick="javascript:habilitarMenu('${lisper.codm}')">
+    									<img  src="images/actualizar.bmp" style="vertical-align: middle;width:24px;height:24px" alt="Habilitar" title="Habilitar" />
+    									</a>
+    									#else
+    									<img  src="images/actualizar.bmp" style="vertical-align: middle;width:24px;height:24px" alt="Habilitar" title="Habilitar" />
+    									#end
+									</div>
+								</td>   
+								<td align="center" width="30">
+									<a href="modMenu.html?xcodm=${lisper.getCifrarCodm()}">
+									<img src="images/opciones/mod.png" style="vertical-align: middle;width:24px;height:24px" alt="Modificar" title="Modificar" />	
+									</a>
+								</td>
+							</tr>
+            			#else
+                                
+                        #end
+
+                        #set($i=$i+1)
+                        #end
+                        #set($j=$j+1)
+                        #set($ini=$ini+10)
+                        #set($fin=$fin+10)
+            				                		
+                    	</tbody>
+         	</table>
+         	
+			</div>
+           
+            #else
+                #if(($cont%10 == 1))
+                #set($div=$j)
+                
+		<div id="div${div}" class="pagedemo" style="display: none;padding-bottom:2px;padding-left:2px;padding-right:2px;padding-top:2px;background: rgba(101, 75, 36, 0.530);">
+		
+			<table class="adminlist">
+		
+                    	<thead>
+                    		<tr>
+								<th width="20"> # </th>
+								<th class="title" nowrap="nowrap">Nombre del Area</th>
+								<th width="20"> Estado </th>
+								<th width="20"> B </th>
+								<th width="20"> Hab </th>
+								<th width="20"> M </th>
+                    		</tr>
+                    	</thead>					
+                    	<tbody>
+
+            				#set($i=1)
+            				#foreach($lisper in $xlista)													
+								#if($i%2 == 0) #set($col=1) #else #set($col=0) #end	
+								#set($id=$i)
+ 	                            #if(($i>$ini)and($i<=$fin))
+							<tr id="p${id}" class="row${col}">
+                    			<td align="center" width="30"> ${i}  </td>   
+								
+								<td>${lisper.nombre} </td> 
+								  
+								<td>
+									#if (${lisper.estado}==1)
+										<img src="images/hand_up.png" style="vertical-align: middle;width:24px;height:24px" alt="Adicionar" title="Adicionar" />
+									#else
+										<img src="images/hand_down.png" style="vertical-align: middle;width:24px;height:24px" alt="Adicionar" title="Adicionar" />
+									#end	
+								 </td>
+								
+								
+								<td align="center" width="30">
+									<div id="confirmDelete">		
+										#if(${lisper.estado}==1)							
+    									<a  href="javascript:void(0)" onclick="javascript:eliminarMenu('${lisper.codm}')">
+    									<img  src="images/opciones/del.png" style="vertical-align: middle;width:24px;height:24px" alt="Eliminar" title="Eliminar" />
+    									</a>
+    									#else
+    									<img  src="images/opciones/del.png" style="vertical-align: middle;width:24px;height:24px" alt="Eliminar" title="Eliminar" />
+    									#end
+									</div>
+								</td>   
+								<td align="center" width="30">
+									<div id="confirmDelete">	
+										#if(${lisper.estado}==0)								
+    									<a  href="javascript:void(0)" onclick="javascript:habilitarMenu('${lisper.codm}')">
+    									<img  src="images/actualizar.bmp" style="vertical-align: middle;width:24px;height:24px" alt="Habilitar" title="Habilitar" />
+    									</a>
+    									#else
+    									<img  src="images/actualizar.bmp" style="vertical-align: middle;width:24px;height:24px" alt="Habilitar" title="Habilitar" />
+    									#end
+									</div>
+								</td>   
+								<td align="center" width="30">
+									<a href="modMenu.html?xcodm=${lisper.getCifrarCodm()}">
+									<img src="images/opciones/mod.png" style="vertical-align: middle;width:24px;height:24px" alt="Modificar" title="Modificar" />	
+									</a>
+								</td>
+							</tr>
+            				
+							
+							#else
+                                
+                            #end
+							
+            				#set($i=$i+1)
+            				#end                   		
+                    	</tbody>
+         	</table>
+		
+		</div>
+		
+		#set($ini=$ini+10)
+                #set($fin=$fin+10)
+                
+                #set($j=$j+1)
+                #end
+            #end
+
+        #set($id=$cont)
+        
+        #set($cont=$cont+1)
+
+        #end
+
+        #set($cont=$cont - 1)
+        #if($cont>10)
+            #if(($cont%10)==0)
+                #set($divs=($cont/10))
+            #else
+                #set($divs=($cont/10)+1)
+            #end
+        #else
+            #set($divs=1)
+        #end
+		
+		<div id="paginador" style="width:50%;display:inline-block;background:"#fff";">
+        </div>
+        <div style="float:right;display:inline-block;font-family: serif;">$cont Resultados
+        </div>
+        <script type="text/javascript">
+                $(function(){
+                    $("#paginador").paginate({
+                        count: $divs,
+                        start: 1,
+                        display: 10,
+                        border: true,
+                        border_color: '#fff',
+                        text_color: 'white',
+                        background_color: 'darkred',
+                        border_hover_color: 'darkred',
+                        text_hover_color: '#C03400',
+                        text_align: 'right',
+                        background_hover_color: '#fff',
+                        images: false,
+                        mouse: 'press',
+                        onChange: function (page){
+                            $('._current','#paginationdemo').removeClass('_current').hide();
+                            $('#div' + page).addClass('_current').show();
+                        }
+                    });
+                });
+        </script>
+		</div>
+		</td>
+    </tr>
+<script type="text/javascript">
+    function eliminarMenu(codm){
+    	if(confirm('¿Seguro de Eliminar Menu ?')){
+    		window.location="delMenu.html?xcodm="+codm;
+    	}		
+    }
+    
+    function habilitarMenu(codm){
+    	if(confirm('¿Seguro de Habilitar Menu ?')){
+    		window.location="habMenu.html?xcodm="+codm;
+    	}		
+    }
+	
+	$(document).ready(function(){  
+		$("#buscarMenu").click(function (){
+			var xmenu=$("#xmenu").val();
+			location.href="GestionMenusB.html?xmenu="+xmenu;
+		});
+   	}); 
+	
+	
+</script>
+</table>
+</body>
+
+			
+		</div>
+		
+		
+			<div class="ventana1" align="center">
+					<table id="t1">
+					<tr>
+						<td align="center"><img alt="menu" style="vertical-align: middle; width: 100px; height: 100px;" src="uploads/${usuario.foto}"/></td>
+						<td> ${usuario.nombre} ${usuario.ap} ${usuario.am} </td>
+					</tr>
+				
+					<tr>
+						<td align="center"><br><a href="Cerrar.html"><input type="submit" value="Salir"></a></td>
+						
+						<td align="center"><br><div class="cerrar"><a href="javascript:closeVentana();"><input type="submit" value="Cerrar"></a></div></td>
+					</tr>
+				</table>
+				</div>
+		
+		<div class="ventana2" align="center">
+			<h1>Login</h1>
+			<form action="valida.html" method="get">
+			<input type="text" name="xlogin" placeholder="Login.."/>
+			<input type="password" name="xclave" id="xclave" placeholder="Password.."/>
+			<input type="submit" name="boton" value="Ingresar" onclick="encriptar()"/>
+			<a href="javascript:closeVentana2();">Cancelar</a>
+			</form>
+		</div>
+
+		<div class="ventanaAddPer" align="center">
+			<h1>Añadir Nuevo Menu</h1><br>
+			<form action="addMenu_2.html" name="form1" method="post">
+			<input type="text" name="xnombre" placeholder="Nombre.." id="id_nombre" onkeypress="return filtroEntrada(event)" onkeyup="transformar()" required/><br>
+			<input type="submit" onclick="confirmacion()" name="boton" value="Guardar"/>
+			<a href="javascript:closeVentanaAddArea();">Cancelar</a>
+			</form>
+		</div>
+		
+		<div class="ventanaModPer" align="center">
+			<h1>Modificar datos de Area</h1>
+			<form action="modArea_2.html" method="post">
+			<input type="text" name="xcoda" placeholder="${datos.coda}"/><br>
+			<input type="text" name="xnombre" placeholder="Nombre.."/><br>
+			<input type="submit" name="boton" value="Guardar"/>
+			<a href="javascript:closeVentanaModPer();">Cancelar</a>
+			</form>
+		</div>
+		
+		<div class="ventanacrearDatosAcceso" align="center">
+			<h1>Adicionar Nuevos Datos</h1>
+			<form action="crearDatosAcceso_2.html" method="post">
+			<input type="text" name="xcodper" placeholder="Codigo.."/><br>
+			<input type="text" name="xlogin" placeholder="Login.."/><br>
+			<input type="text" name="xpasswd" placeholder="Password.."/><br>
+			<input type="submit" name="boton" value="Guardar"/>
+			<a href="javascript:closeVentanacrearDatosAcceso();">Cancelar</a>
+			</form>
+		</div>
+		
+</body>
+</html>

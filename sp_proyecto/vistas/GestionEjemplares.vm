@@ -1,0 +1,572 @@
+
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Biblioteca</title>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/sha1/sha1.pack.js"></script>
+	<script> 
+		function encriptar() {
+			var input_clave = document.getElementById("xclave");
+			input_clave.value=sha1(input_clave.value);
+		};
+	</script>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<LINK href="css/estilo2.css" type="text/css" rel="stylesheet"> 
+	<link rel="stylesheet" type="text/css" href="css/estilitos5.css">
+	<link rel="stylesheet" type="text/css" href="css/estiloUsuarios.css">
+	
+	<link type="text/css" href="css/pagination.css" rel="stylesheet">
+	 <script src="js/jquery.paginate.js"></script>
+	
+	<script type="text/javascript">
+		function openVentana(){
+			$(".ventana1").slideDown(1000);
+		}
+		function closeVentana(){
+			$(".ventana1").slideUp(1000);
+		}
+		function closeVentana2(){
+			$(".ventana2").slideUp(1000);
+		}
+		function openVentana2(){
+			$(".ventana2").slideDown(1000);
+		}
+		function closeVentanaAddPer(){
+			$(".ventanaAddPer").slideUp(1000);
+		}
+		function openVentanaAddPer(){
+			$(".ventanaAddPer").slideDown(1000);
+		}
+		function closeVentanaModPer(){
+			$(".ventanaModPer").slideUp(1000);
+		}
+		function openVentanaModPer(){
+			$(".ventanaModPer").slideDown(1000);
+		}
+		
+		function cargar(){
+			document.getElementById("id_ci").focus();
+		}
+		
+		function confirmacion(){
+			if(confirm('Estas seguro de enviar este formulario?')){
+				document.form1.submit();
+			}
+		}
+			
+		
+		
+		function filtroEntrada(event) {
+          var chCode = ('charCode' in event) ? event.charCode : event.keyCode;
+          //retorna FALSE si se pulsa teclas numericas
+          return (chCode < 48 /* '0' */ || chCode > 57 /* '9' */);
+		}
+		
+		function filtroEntrada1(event) {
+          var chCode = ('charCode' in event) ? event.charCode : event.keyCode;
+          //retorna FALSE si se pulsa teclas numericas
+          return (chCode < 58 /* '0' */ || chCode > 126 /* '9' */ );
+		}
+		
+		
+		function transformar() {  
+		    var x = document.getElementById("id_nombre");
+		    x.value = x.value.toUpperCase();
+		}
+		function transformaram() {
+		    var x = document.getElementById("id_am");
+		    x.value = x.value.toUpperCase();
+		}
+		function transformarap() {
+		    var x = document.getElementById("id_ap");
+		    x.value = x.value.toUpperCase();
+		}
+	</script>
+	
+</head>
+<body>
+		<table width="100%" id="supder">
+			<tr>
+				<td align="center" height="100px">
+					<img alt="menu" style="vertical-align: middle; width: 100%; height: 100%;" src="images/grey_book.png"/>
+				</td>
+				<td align="center">
+					<h1 id="titulo"><b>. : : B I B L I O T E C A ____B R E A K : : .</b></h1>
+					<br>
+					<div class="fecha">
+                    <script type="text/javascript">
+                    var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+                    var diasSemana = new Array ("Domingo","Lunes","Martes","Miï¿½rcoles","Jueves","Viernes","Sï¿½bado");
+                    var f = new Date();
+                    document.write(diasSemana[f.getDay()]+", "+f.getDate()+" de "+meses[f.getMonth()]+" de "+f.getFullYear());
+                    
+                    </script>
+                </div>
+				</td>
+				<td align="right" width="275px">
+				<table width="100%" id="supder">
+				<tr>
+				<td align="left">
+					<p>${usuario.nombre} ${usuario.ap} ${usuario.am}</p>
+				
+                <select name="menu_sel" id="xrol">
+                                <option value="1" selected="select">Administrativo</option>
+                                #foreach($rol in $xroles)
+                                    <option value="${rol.codr}" class="menulateral">${rol.nombre}</option>
+                                #end
+                            	</select>
+				
+				</td>
+				<td width="20%">	
+					<a href="javascript:openVentana();"><img alt="menu" style="vertical-align: middle; width: 60px; height: 60px;" src="uploads/${usuario.foto}"/></a>
+				</td>
+				
+				</tr>
+				</table>
+				</td>
+			</tr>
+		</table>
+		<div id="barra-lateral">
+		#foreach($reg in $xmenus)
+			<div class="contenedor-logos" id="celda">
+				<div id="grupo">
+				<p class="icon-menu"><span>${reg.nombre}</span></p>
+				</div>
+				#foreach($op in $xopciones)
+      
+    		  #if(${reg.codm}==${op.codm})
+				<div class="contenedor"id="sub">
+				<p id="op" class="icon-triangle-right"><a href='${op.enlace}'><span>${op.nombre}</span></a></p>
+				</div>
+				#end
+				#end
+			</div>
+			#end
+		</div>
+		
+		
+		<div id="body" height="100%">
+			 
+	
+	
+<body>
+	
+	<div id="control-panel-title" align="left">
+		<span>
+			<img alt="menu" style="vertical-align: middle; width: 48px; height: 48px;" src="images/adm-personal.png"/>
+			.::Gesti?n Textos
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div id="notices"></div>
+		</span>
+	</div>
+	
+	<div style="margin:0 auto;width:85%">
+			<span class="title-table">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				
+				Filtro Textos:
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;
+			
+				Editorial:
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+				Areas:
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+				&nbsp;&nbsp;
+				Tipos:
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				
+			</span>
+						
+				<span class="title-table">
+				</span>
+
+				<table>
+					<tbody>
+						<tr>
+							<td align="center">
+								<td>
+							<form name="tipos" id="tipos" action="ejemplares.html" target="informacion" method="post" onload="this.form.submit()">				
+								
+								<input id="xbusqueda" type="text" value="${xtexto2}" name="xtexto"/>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</form>
+							</td>	                              
+							<td align="center">	
+								<select name="xeditorial" id="selectmenu">
+                                <option value="T" selected="select">Todos</option>
+                                #foreach($edit in $xeditoriales)
+                                    <option value="${edit.nombre}">${edit.nombre}</option>
+                                #end
+                            	</select>&nbsp;&nbsp;
+                            </td>	
+								
+								<td align="center">
+								<select name="xarea" id="selectmenu2">
+                                <option value="T" selected="select">Todos</option>
+                                #foreach($are in $xareas)
+                                    <option value="${are.nombre}">${are.nombre}</option>
+                                #end
+                            	</select>&nbsp;&nbsp;
+                            </td>	
+                            	
+                            <td align="center">	
+								<select name="xtipo" id="selectmenu3">
+                                <option value="T" selected="select">Todos</option>
+                                #foreach($tip in $xtipos)
+                                    <option value="${tip.nombre}">${tip.nombre}</option>
+                                #end
+                            	</select>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp
+								</td>
+								<td align="center">
+								<a href="ejemplaresA.html"><input type="radio" id="buscarActivos" name="" ></a>&nbsp;&nbsp;Activos
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+								<a href="ejemplaresB.html"><input id="buscarBajas" type="radio" name="" ></a>&nbsp;&nbsp;Bajas
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<a href="ejemplares.html"><input type="radio" name="" checked="checked"></a>&nbsp;&nbsp;Todos
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								</td>								
+							</td>
+						</tr>
+					</tbody>
+				</table>					
+				
+				
+	<table width="100%" border="0">
+	<tr>
+        <td  colspan="5">
+	<div id="paginationdemo" class="demo" style="padding-bottom:3px;padding-left:3px;padding-right:3px;padding-top:3px;background-color: IndianRed;border-radius: 6px;">
+	
+			 #set($j=1)
+        
+        #set($cont=1)
+        
+        #set($ini=0)
+        #set($fin=10)
+        #foreach($lisper in $xlista)        
+
+            #if($cont%2 == 0) #set($col=1) #else #set($col=0)
+            #end
+
+            #if($cont == 1)
+                #set($div=$j)
+			
+			<div id="div${div}" class="pagedemo _current" style="padding-bottom:2px;padding-left:2px;padding-right:2px;padding-top:2px;background: rgba(101, 75, 36, 0.530);">
+			
+			
+			<table class="adminlist">
+		
+                    	<thead>
+                    		<tr>
+								<th width="20"> # </th>
+								<th width="20"> # </th>
+								<th class="title" nowrap="nowrap">Titulo</th>
+	                            <th class="title" nowrap="nowrap">Area</th>
+	                            <th class="title" nowrap="nowrap">Editorial</th>
+	                            <th class="title" nowrap="nowrap">Tipos</th>
+								<th width="20"> Estado </th>
+                    		</tr>
+                    	</thead>					
+                    	<tbody>
+
+            				#set($i=1)
+            				#foreach($lisper in $xlista)													
+								#if($i%2 == 0) #set($col=1) #else #set($col=0) #end	
+								#set($id=$i)
+ 	                            #if(($i>$ini)and($i<=$fin))
+							<tr id="p${id}" class="row${col}">
+                    			<td align="center" width="30"> ${i}  </td>   
+								<td>  
+									<input type="radio" value="${lisper.codt}"  name="menu_sel""/>	
+								</td>
+								<td>${lisper.titulo}</td>
+                                <td>${lisper.anombre}</td>
+                                <td>${lisper.enombre}</td>
+                                <td>${lisper.tinombre}</td>
+								  
+								<td>
+									#if (${lisper.testado}==1)
+										<img src="images/hand_up.png" style="vertical-align: middle;width:24px;height:24px" alt="Adicionar" title="Adicionar" />
+									#else
+										<img src="images/hand_down.png" style="vertical-align: middle;width:24px;height:24px" alt="Adicionar" title="Adicionar" />
+									#end	
+								 </td>
+		
+							</tr>
+            			#else
+                                
+                        #end
+
+                        #set($i=$i+1)
+                        #end
+                        #set($j=$j+1)
+                        #set($ini=$ini+10)
+                        #set($fin=$fin+10)                 		
+                        
+                    	</tbody>
+         	</table>
+         	
+         	</div>
+           
+            #else
+                #if(($cont%10 == 1))
+                #set($div=$j)
+                
+		<div id="div${div}" class="pagedemo" style="display: none;padding-bottom:2px;padding-left:2px;padding-right:2px;padding-top:2px;background: rgba(101, 75, 36, 0.530);">
+		
+		<table class="adminlist">
+		
+                    	<thead>
+                    		<tr>
+                    			<th width="20"> # </th>
+								<th width="20"> # </th>
+								<th class="title" nowrap="nowrap">Titulo</th>
+	                            <th class="title" nowrap="nowrap">Area</th>
+	                            <th class="title" nowrap="nowrap">Editorial</th>
+	                            <th class="title" nowrap="nowrap">Tipos</th>
+								<th width="20"> Estado </th>
+                    		</tr>
+                    	</thead>					
+                    	<tbody>
+
+            				#set($i=1)
+            				#foreach($lisper in $xlista)													
+								#if($i%2 == 0) #set($col=1) #else #set($col=0) #end	
+								#set($id=$i)
+ 	                            #if(($i>$ini)and($i<=$fin))
+							<tr id="p${id}" class="row${col}">
+                    			<td align="center" width="30"> ${i}  </td>
+								<td>  
+									<input type="radio" value="${lisper.codt}"  name="menu_sel""/>	
+								</td>
+								<td>${lisper.titulo}</td>
+                                <td>${lisper.anombre}</td>
+                                <td>${lisper.enombre}</td>
+                                <td>${lisper.tinombre}</td>
+								  
+								<td>
+									#if (${lisper.testado}==0)
+										<img src="images/hand_up.png" style="vertical-align: middle;width:24px;height:24px" alt="Adicionar" title="Adicionar" />
+									#else
+										<img src="images/hand_down.png" style="vertical-align: middle;width:24px;height:24px" alt="Adicionar" title="Adicionar" />
+									#end	
+								 </td>
+						
+							</tr>
+							#else
+                                
+                            #end
+							
+            				#set($i=$i+1)
+            				#end                   		
+                    	</tbody>
+         	</table>
+		
+		</div>
+		
+		#set($ini=$ini+10)
+                #set($fin=$fin+10)
+                
+                #set($j=$j+1)
+                #end
+            #end
+
+        #set($id=$cont)
+        
+        #set($cont=$cont+1)
+
+        #end
+
+        #set($cont=$cont - 1)
+        #if($cont>10)
+            #if(($cont%10)==0)
+                #set($divs=($cont/10))
+            #else
+                #set($divs=($cont/10)+1)
+            #end
+        #else
+            #set($divs=1)
+        #end
+		
+		<div id="paginador" style="width:50%;display:inline-block;background:"#fff";">
+        </div>
+        <div style="float:right;display:inline-block;font-family: serif;">$cont Resultados
+        </div>
+        <script type="text/javascript">
+                $(function(){
+                    $("#paginador").paginate({
+                        count: $divs,
+                        start: 1,
+                        display: 10,
+                        border: true,
+                        border_color: '#fff',
+                        text_color: 'white',
+                        background_color: 'darkred',
+                        border_hover_color: 'darkred',
+                        text_hover_color: '#C03400',
+                        text_align: 'right',
+                        background_hover_color: '#fff',
+                        images: false,
+                        mouse: 'press',
+                        onChange: function (page){
+                            $('._current','#paginationdemo').removeClass('_current').hide();
+                            $('#div' + page).addClass('_current').show();
+                        }
+                    });
+                });
+        </script>
+		</div>
+		</td>
+    </tr>
+																
+							
+<script type="text/javascript">
+    function eliminarEjemplar(codinv){
+    	if(confirm('¿Seguro de Eliminar Ejemplar ?')){
+    		window.location="delEjemplar.html?xcodinv="+codinv;
+    	}		
+    }
+    
+    function habilitarEjemplar(codinv){
+    	if(confirm('¿Seguro de Habilitar Ejemplar ?')){
+    		window.location="habEjemplar.html?xcodinv="+codinv;
+    	}		
+    }
+	
+	$("#selectmenu").on('change',function (){
+		var xeditorial=$("#selectmenu").val();
+		//alert(xeditorial);
+		location.href="ejemplares.html?xeditorial="+xeditorial;
+	});
+	
+	$("#selectmenu2").on('change',function (){
+		var xarea=$("#selectmenu2").val();
+		//alert(xarea);
+		location.href="ejemplares.html?xarea="+xarea;
+	});
+	
+	$("#selectmenu3").on('change',function (){
+		var xtipo=$("#selectmenu3").val();
+		//alert(xtipo);
+		location.href="ejemplares.html?xtipo="+xtipo;
+	});
+	
+	
+	$(document).ready(function(){
+		
+		$('input[name=menu_sel]').change(function () {
+			var codt=$("input[name='menu_sel']:checked").val();
+			//alert("xxx");
+			$.ajax({
+		    	type:"POST",
+		    	data : { xcodt : codt },
+		    	url:"Dejemplares.html", 
+		    	success: function(data){
+		    	//alert(data);
+		    		$("#lisProc").html(data);
+		    	}
+		    });
+	  	});		
+	  	
+	  	$("#xbusqueda").onchange(function (){
+			var xtexto=$("#xbusqueda").val();
+			location.href="ejemplares.html?xtexto="+xtexto;
+		});
+		
+	}); //fin de document
+
+</script>
+</table>
+
+<table width="100%">
+	<tr>
+		<td align="center">	
+			<br><br>
+			<DIV id="lisProc">    </DIV>	
+		</td>
+	</tr>
+</table>	
+</body>
+
+			
+		</div>
+
+		
+			<div class="ventana1" align="center">
+					<table id="t1">
+					<tr>
+						<td align="center"><img alt="menu" style="vertical-align: middle; width: 100px; height: 100px;" src="uploads/${usuario.foto}"/></td>
+						<td> ${usuario.nombre} ${usuario.ap} ${usuario.am} </td>
+					</tr>
+				
+					<tr>
+						<td align="center"><br><a href="Cerrar.html"><input type="submit" value="Salir"></a></td>
+						
+						<td align="center"><br><div class="cerrar"><a href="javascript:closeVentana();"><input type="submit" value="Cerrar"></a></div></td>
+					</tr>
+				</table>
+				</div>
+		
+		<div class="ventana2" align="center">
+			<h1>Login</h1>
+			<form action="valida.html" method="get">
+			<input type="text" name="xlogin" placeholder="Login.."/>
+			<input type="password" name="xclave" id="xclave" placeholder="Password.."/>
+			<input type="submit" name="boton" value="Ingresar" onclick="encriptar()"/>
+			<a href="javascript:closeVentana2();">Cancelar</a>
+			</form>
+		</div>
+
+		<div class="ventanaModPer" align="center">
+			<h1>Modificar datos de Persona</h1>
+			<form action="modPer_2.html" method="post">
+			<input type="text" name="xcodper" placeholder="Codigo.."/><br>
+			<input type="text" name="xci" placeholder="Cedula.."/><br>
+			<input type="text" name="xnombre" placeholder="Nombre.."/><br>
+			<input type="text" name="xap" placeholder="Ap. Paterno.."/><br>
+			<input type="text" name="xam" placeholder="Ap. Materno.."/><br>
+			<input type="radio" name="xgenero" value="M">Masculino  
+			<input type="radio" name="xgenero" value="F">Femenino<br><br>	
+			Tipo de Persona<select name="xtipoper" align="left" >
+						<option value="A" selected>Administrativo</option>
+						<option value="P">Publico</option>			
+					</select><br><br>
+			<input type="submit" name="boton" value="Guardar"/>
+			<a href="javascript:closeVentanaModPer();">Cancelar</a>
+			</form>
+		</div>
+		
+		<div class="ventanacrearDatosAcceso" align="center">
+			<h1>Adicionar Nuevos Datos</h1>
+			<form action="crearDatosAcceso_2.html" method="post">
+			<input type="text" name="xcodper" placeholder="Codigo.."/><br>
+			<input type="text" name="xlogin" placeholder="Login.."/><br>
+			<input type="text" name="xpasswd" placeholder="Password.."/><br>
+			<input type="submit" name="boton" value="Guardar"/>
+			<a href="javascript:closeVentanacrearDatosAcceso();">Cancelar</a>
+			</form>
+		</div>
+		
+</body>
+</html>

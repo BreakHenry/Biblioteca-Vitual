@@ -1,0 +1,171 @@
+*{
+	margin:0px;
+	padding:0px;
+	font-family: rockwell;
+}
+
+body{
+	
+}
+
+/*menu lateral*/
+
+table#supder{
+	color:silver;
+	background-color:darkred;	
+}
+
+#titulo{
+	color: white;
+}
+
+div#barra-lateral{
+	text-align:center;
+	color:white;
+	position:fixed;
+	width:30%;
+	height:100%;
+	background-color:darkred;
+	overflow:hidden;
+	-webkit-transition:width 0.5s cubic-bezier(.61,.01,.37,1);
+	-moz-transition:width 0.5s cubic-bezier(.61,.01,.37,1);
+	-ms-transition:width 0.5s cubic-bezier(.61,.01,.37,1);
+	transition:width 0.5s cubic-bezier(.61,.01,.37,1);
+}
+
+div#barra-lateral:hover{
+	text-align:left;
+	width:155px;
+	cursor:pointer;
+}
+
+div.contenedor-logos{
+	width:155px;
+	height:40px;
+}
+
+#celda{ 
+-webkit-transition: all .9s ease;
+	-moz-transition: all .9s ease;
+	-ms-transition: all .9s ease;
+	transition: all .9s ease;
+}
+div#celda:hover{ 
+	background-color:red;
+	opacity:1;
+	height:145px;
+}
+
+div#grupo{
+	height:40px;
+	-webkit-transition: all .9s ease;
+	-moz-transition: all .9s ease;
+	-ms-transition: all .9s ease;
+	transition: all .9s ease;
+}
+
+div#grupo:hover{
+	font-size:30px;
+	width:300px;
+	background-color:darkred;
+}
+
+/* opciones */
+
+p#op {
+	visibility:hidden;
+}
+
+div#celda:hover p#op{
+	visibility:visible;
+}
+
+div#sub:hover{ 
+	font-size:20px;
+	width:200px;
+	background-color:crimson;
+}
+
+div#sub{
+	height:35px;
+	-webkit-transition: all .9s ease;
+	-moz-transition: all .9s ease;
+	-ms-transition: all .9s ease;
+	transition: all .9s ease;
+}
+ 
+div.contenedor{
+	width:150px;
+	height:20px;
+	text-align:center;
+}
+
+/*ventana modal 1*/
+
+.ventana1{
+				position:fixed;
+				width:250px;
+				border:1px solid darkred;
+				margin:200px ;
+				padding:1em;
+				border-radius:6px;
+				background-image: url(../images/bg-modal.png);
+				top: 0;
+				left: 635;
+				display:none;	
+	}
+
+
+a{
+	text-decoration:none;
+}
+/*login*/
+			h1,h2,h3,h4{
+				font-family:arial;
+				color:red;
+			}
+			input[type=text], input[type=password]{
+				margin:0 0 1em 0;
+				width:200px;
+				border:0px;
+				padding:1em;
+				border-radius:3px;
+			}
+			input[type=onsubmit] , form a{
+				margin:;
+				background:darkred;
+				padding:1em;
+				border:none;
+				color:white;
+				font-family:arial;
+				font-size:14px;
+				border-radius:3px;
+				text-decoration:none;
+			}
+			input[type=onsubmit]:hover , form a:hover{
+				background:red;
+				cursor:pointer;
+			}
+			
+			
+			
+iframe#iframe1{
+	style:none;
+	width: 100%;
+	height: 655px;
+	background-color: white;
+}			
+
+
+
+/*body*/
+
+div#body{
+	background-color:white;
+	position:absolute;
+	right:0px;
+	min-height:85.2%;	
+	left:150px;
+	width: 100%;
+	height: 100%;
+}
